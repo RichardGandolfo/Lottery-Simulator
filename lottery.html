@@ -1,8 +1,10 @@
 <html>
-	<head> 
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Powerball Simulator</title>
 
 		<script src="simulations.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 		<style>
 			html, body {
@@ -11,29 +13,42 @@
 				width: 100%;
 			}
 
+			html {
+				background-image: linear-gradient(#C0C0C0, lightgray);
+			}
+
 			.container {
 				margin-left: auto;
 				margin-right: auto;
-				margin-top: 5%;
-				border: 4px solid black;
+				margin-top: 3%;
+				border: 0px solid black;
 				width: 99%;
 				height: 35%;
-				padding-top: 8px;
 				padding-bottom: 8px;
 				text-align: center;
 			}
 
 			.circle, .powerball {
-				height: 190px;
-				width: 190px;
-				border: 3px solid gray;
+				height: 67.5%;
+				width: 13.8%;
+				border: 6px solid gray;
 				display: inline-block;
 				margin-left: 15px;
 				margin-right: 15px;
 				position: relative;
 				border-radius: 50%;
-				box-shadow: 0px 0px 12px 4px black;
-				top: 20%;
+				box-shadow: 0px 16px 16px 4px gray;
+				top: 10%;
+				box-sizing: border-box;
+				transition: background-color 3s;
+			}
+
+			.circle:hover {
+				background-color: yellow;
+			}
+
+			.circle {
+				background-color: white;
 			}
 
 			.powerball {
@@ -54,9 +69,9 @@
 			.circle input, .powerball input {
 				width: 80%;
 				height: 25%;
-				background-color: gray;
-				color: white;
-				font-size: 24px;
+				background-color: white;
+				color: black;
+				font-size: 32px;
 				text-align: center;
 			}
 
@@ -65,37 +80,167 @@
                 -webkit-appearance: none;
   				margin: 0;
 			}
+
+			button {
+				margin-left: 5%;
+				display: inline-block;
+			}
+
+			.history {
+				width: 900px;
+				height: 150px;
+				border: 3px solid black;
+				display: inline-block;
+				position: relative;
+				margin-left: 10%;
+				overflow-y: scroll;
+				font-size: 72px;
+				text-align: center;
+				background-image: linear-gradient(blue, lightblue);
+				background-color: white;
+			}
+
+			.history .circle, .history .powerball {
+				height: 67.5%;
+				width: 10.8%;
+			}
 		</style>
 	</head>
 
-	<body>
+	<body onload=test()>
 		<section class="container">
 			<section id="win0" class="circle"> 
-				<p>  </p>  
+				<p>?</p>  
 			</section>
 			<section id="win1" class="circle">  
-				<p>  </p>
+				<p>?</p>
 			</section>
 			<section id="win2" class="circle"> 
-				<p>  </p> 
+				<p>?</p> 
 			</section>
 			<section id="win3" class="circle"> 
-				<p>  </p>  
+				<p>?</p>  
 			</section>
 			<section id="win4" class="circle">  
-				<p>  </p>
+				<p>?</p>
 			</section>
 			<section id="win5" class="powerball"> 
-				<p>  </p>
+				<p>?</p>
 			</section>
 		</section>
 
-		<br><br>
-		<center><button id="startButton" onclick="simulate(10)">Run</button></center>
-		<br><br>
-		<center><button id="lock" onclick="lock()">Lock</button></center>
-		<br><br>
-		<center><button id="unlock" onclick="unlock()">Unlock</button></center>
+		<button id="startButton" onclick="simulate(100)">Run</button>
+		<button id="lock" onclick="lock()">Lock</button>
+		<button id="unlock" onclick="unlock()" disabled=true>Unlock</button>
+
+		<section class="history">
+			<section class="circle">
+				<p>1</p>
+			</section>
+			<section class="circle">
+				<p>2</p>
+			</section>
+			<section class="circle">
+				<p>3</p>
+			</section>
+			<section class="circle">
+				<p>4</p>
+			</section>
+			<section class="circle">
+				<p>5</p>
+			</section>
+			<section class="powerball">
+				<p>6</p>
+			</section>
+			<section class="circle">
+				<p>1</p>
+			</section>
+			<section class="circle">
+				<p>2</p>
+			</section>
+			<section class="circle">
+				<p>3</p>
+			</section>
+			<section class="circle">
+				<p>4</p>
+			</section>
+			<section class="circle">
+				<p>5</p>
+			</section>
+			<section class="powerball">
+				<p>6</p>
+			</section><section class="circle">
+				<p>1</p>
+			</section>
+			<section class="circle">
+				<p>2</p>
+			</section>
+			<section class="circle">
+				<p>3</p>
+			</section>
+			<section class="circle">
+				<p>4</p>
+			</section>
+			<section class="circle">
+				<p>5</p>
+			</section>
+			<section class="powerball">
+				<p>6</p>
+			</section>
+			<section class="circle">
+				<p>1</p>
+			</section>
+			<section class="circle">
+				<p>2</p>
+			</section>
+			<section class="circle">
+				<p>3</p>
+			</section>
+			<section class="circle">
+				<p>4</p>
+			</section>
+			<section class="circle">
+				<p>5</p>
+			</section>
+			<section class="powerball">
+				<p>6</p>
+			</section><section class="circle">
+				<p>1</p>
+			</section>
+			<section class="circle">
+				<p>2</p>
+			</section>
+			<section class="circle">
+				<p>3</p>
+			</section>
+			<section class="circle">
+				<p>4</p>
+			</section>
+			<section class="circle">
+				<p>5</p>
+			</section>
+			<section class="powerball">
+				<p>6</p>
+			</section>
+			<section class="circle">
+				<p>1</p>
+			</section>
+			<section class="circle">
+				<p>2</p>
+			</section>
+			<section class="circle">
+				<p>3</p>
+			</section>
+			<section class="circle">
+				<p>4</p>
+			</section>
+			<section class="circle">
+				<p>5</p>
+			</section>
+			<section class="powerball">
+				<p>6</p>
+			</section>
+		</section>
 
 		<section class="container" id="yourNumbers">
 			<section id="num0" class="circle"> 
@@ -117,5 +262,8 @@
 				<input type="number"></input>
 			</section>
 		</section>
+
+		<canvas id="myChart"></canvas>
+
 	</body>
 </html>
